@@ -39,3 +39,15 @@ footer{
     float:left;
   }
 }
+#logo{
+  font-size: 200%;
+  color: white;
+  letter-spacing: -5px;
+  /*padding-top: 30px;*/
+  font-weight: bold;
+  margin-top: 40px;
+  &:hover{
+    text-shadow: 10px 10px 1px;
+    text-decoration: none;
+  }
+}
