@@ -2,7 +2,8 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   def setup
-    @user=User.new(name: "samer", email: "samir-suraj.94@live.com")
+    @user=User.new(name: "samer", email: "samir-suraj.94@live.com",
+                   password:"yoyopassword", password_confirmation:"yoyopassword")
   end
   test "should be valid" do
     assert @user.valid?
@@ -15,12 +16,20 @@ class UserTest < ActiveSupport::TestCase
     @user.email=""
     assert_not @user.valid?
   end
+  test "password should be present" do
+    @user.password=@user.password_confirmation=" "*7
+    assert_not @user.valid?
+  end
   test "name should not be too long" do
     @user.name="s"*51
     assert_not @user.valid?
   end
   test "email should not be too long" do
     @user.email="s"*250+"@live.com"
+    assert_not @user.valid?
+  end
+  test "password should be longer" do
+    @user.password=@user.password_confirmation="a"*5
     assert_not @user.valid?
   end
   test "email validation should reject invalid email address" do
@@ -36,4 +45,11 @@ class UserTest < ActiveSupport::TestCase
     dupuser.email=dupuser.email.upcase
     assert_not dupuser.valid?
   end
+  #how come @user isn't saved to db after prev test runs
+  test "email should be downcased before save" do
+    @user.email="SAMirsuraj@live.COM"
+    @user.save
+    assert_equal "samirsuraj@live.com", @user.reload.email
+  end
+
 end
