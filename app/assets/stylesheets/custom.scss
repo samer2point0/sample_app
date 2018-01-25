@@ -3,6 +3,9 @@
 
 body{
   padding-top: 60px;
+  .content{
+    margin-top: 50px;
+  }
 }
 h1,h2,h3,h4,h5,h6{
   line-height: 1;
@@ -50,4 +53,11 @@ footer{
     text-shadow: 10px 10px 1px;
     text-decoration: none;
   }
+}
+.debug_dump{
+  box-sizing: border-box;
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
 }
