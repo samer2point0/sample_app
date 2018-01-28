@@ -42,7 +42,7 @@ class UserTest < ActiveSupport::TestCase
   test "email should be unique" do
     dupuser=@user.dup
     @user.save
-    dupuser.email=dupuser.email.upcase
+    dupuser.email="samir-Suraj.94@live.com"#dupuser.email.upcase
     assert_not dupuser.valid?
   end
   #how come @user isn't saved to db after prev test runs
