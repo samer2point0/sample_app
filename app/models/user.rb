@@ -6,7 +6,7 @@ class User < ApplicationRecord
                      format: {with: ValidEmailRegEx},
                      uniqueness:{case_sensitive: false}
                      }
-  validates :password, {presence: true, length: {minimum:6}}
+  validates :password, {presence: true, length: {minimum:6}, allow_nil: true} #has secure password has a second validation for passwords
   attr_accessor :remember_token
   has_secure_password
 
