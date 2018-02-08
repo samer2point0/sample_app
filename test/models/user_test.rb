@@ -47,9 +47,9 @@ class UserTest < ActiveSupport::TestCase
   end
   #how come @user isn't saved to db after prev test runs
   test "email should be downcased before save" do
-    @user.email="SAMirsuraj@live.COM"
+    @user.email="SAMir@live.COM"
     @user.save
-    assert_equal "samirsuraj@live.com", @user.reload.email
+    assert_equal "samir@live.com", @user.reload.email
   end
 
   test "authenticated should return false for a user with nil remember_digest" do
