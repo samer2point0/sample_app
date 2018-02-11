@@ -3,26 +3,35 @@ samer:
   name: Samer Mohamed
   email: samirsuraj@live.com
   password_digest: <%= User.digest('password')%>
-  admin: <%=true%>
-
+  admin: true
+  activated: true
+  activated_at: <%=Time.zone.now%>
 archer:
   name: Sterling Archer
   email: sterling@archer.com
   password_digest: <%= User.digest('password')%>
+  activated: true
+  activated_at: <%=Time.zone.now%>
 
 lana:
   name: Lana Kane
   email: lana@kane.gov
   password_digest: <%= User.digest('password')%>
+  activated: true
+  activated_at: <%=Time.zone.now%>
 
 mallory:
   name: Mallory Archer
   email: mallory@archer.com
   password_digest: <%= User.digest('password')%>
+  activated: true
+  activated_at: <%=Time.zone.now%>
 
 <% 99.times do |n| %>
 user_<%= n%>:
   name: <%="User#{n}"%>
   email: <%="user#{n}@example.com"%>
   password_digest: <%= User.digest('password')%>
+  activated: true
+  activated_at: <%=Time.zone.now%>
 <%end%>
