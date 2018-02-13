@@ -8,7 +8,7 @@ class User < ApplicationRecord
                      uniqueness:{case_sensitive: false}
                      }
   validates :password, {presence: true, length: {minimum:6}, allow_nil: true} #has secure password has a second validation for passwords
-  attr_accessor :remember_token, :activation_token
+  attr_accessor :remember_token, :activation_token, :reset_token
   has_secure_password
 
   def remember
@@ -39,5 +39,10 @@ class User < ApplicationRecord
     def create_activation_digest
       self.activation_token= User.newToken
       self.activation_digest=User.digest(activation_token)
+    end
+    def create_reset_digest
+      self.reset_token=User.newToken
+      update_attribute(reset_digest: User.digest(reset_token))
+      update_attribute(reset_sent_at: Time.zone.now)
     end
 end
