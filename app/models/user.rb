@@ -24,6 +24,11 @@ class User < ApplicationRecord
     update_attribute(:remember_digest, nil)
   end
 
+  def create_reset_digest
+    self.reset_token=User.newToken()
+    update_columns(reset_digest: User.digest(reset_token),reset_sent_at: Time.zone.now)
+  end
+
   class<<self
     def digest(passwrod)
       cost= ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
@@ -40,9 +45,5 @@ class User < ApplicationRecord
       self.activation_token= User.newToken
       self.activation_digest=User.digest(activation_token)
     end
-    def create_reset_digest
-      self.reset_token=User.newToken
-      update_attribute(reset_digest: User.digest(reset_token))
-      update_attribute(reset_sent_at: Time.zone.now)
-    end
+
 end
