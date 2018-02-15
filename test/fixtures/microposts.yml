@@ -1,0 +1,21 @@
+orange:
+  content: I like big orange oranges
+  user: samer
+  created_at: <%= 2.hours.ago%>
+
+purple:
+  content: I'll purple on your face fam
+  user: samer
+  created_at: <%= 3.hours.ago%>
+
+most_recent:
+  content: I ate some tasty shit today
+  user: samer
+  created_at: <%= Time.now%>
+
+<% 30.times do |n| %>
+micropost_<%=n%>:
+  content: <%=Faker::Lorem.sentence(5)%>
+  created_at: <%= n.hours.ago %>
+  user: samer
+<%end%>
