@@ -12,6 +12,11 @@ class User < ApplicationRecord
   attr_accessor :remember_token, :activation_token, :reset_token
   has_secure_password
 
+
+  def feed
+    Micropost.where("user_id=?",id)
+  end
+  
   def remember
     self.remember_token=User.newToken
     update_attribute(:remember_digest, User.digest(remember_token))
