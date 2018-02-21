@@ -16,6 +16,6 @@ most_recent:
 <% 30.times do |n| %>
 micropost_<%=n%>:
   content: <%=Faker::Lorem.sentence(5)%>
-  created_at: <%= n.hours.ago %>
+  created_at: <%= (n+1).hours.ago %>
   user: samer
 <%end%>
