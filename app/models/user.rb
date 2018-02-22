@@ -1,5 +1,15 @@
 class User < ApplicationRecord
   has_many :microposts, dependent: :destroy
+  has_many :active_relationships, class_name: 'Relationship',
+                                  foreign_key: 'follower_id',
+                                  dependent: :destroy
+  has_many :following, through: :active_relationships, source:'followed'
+
+  has_many :passive_relationships, class_name: 'Relationship',
+                                  foreign_key: 'followed_id',
+                                  dependent: :destroy
+  has_many :followers, through: :passive_relationships, source:'follower' #source can be ommitted because rails assumes it
+
   ValidEmailRegEx= /\A[\w+\d\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   before_save {email.downcase!}
   before_create :create_activation_digest
@@ -14,9 +24,19 @@ class User < ApplicationRecord
 
 
   def feed
-    Micropost.where("user_id=?",id)
+    Micropost.where("user_id IN (?) OR user_id=?",following_ids, id)
   end
-  
+
+  def follow(celeb)
+    following << celeb
+  end
+  def following?(celeb)
+    following.include?(celeb)
+  end
+  def unfollow(celeb)
+    following.delete(celeb)
+  end
+
   def remember
     self.remember_token=User.newToken
     update_attribute(:remember_digest, User.digest(remember_token))

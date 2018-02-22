@@ -49,3 +49,16 @@ input{
     border-bottom: 1px solid black;
   }
 }
+.user_avatars{
+  overflow: auto;
+  margin-top: 1px;
+  .gravatar{
+    margin: 1px;
+  }
+  a{
+    padding: 0;
+  }
+}
+.users.follow{
+  padding:0;
+}

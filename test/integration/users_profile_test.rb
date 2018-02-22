@@ -8,7 +8,6 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
   end
 
   test 'profile display' do
-    login_as @user
     get user_path(@user)
     assert_template 'users/show'
     assert_select 'title', full_title(@user.name)
